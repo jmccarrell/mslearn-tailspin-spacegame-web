@@ -1,3 +1,6 @@
+trigger:
+- '*'
+
 pool:
   name: Default
 
@@ -5,5 +8,19 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .Net SDK'
+  inputs:
+    packageType: sdk
+    version: '6.x'
+
+- task: Npm@1
+  displayName: 'run npm install'
+  inputs:
+    verbose: false
+
+- bash: ./node_modules/.bin/node-sass Tailspin.SpaceGame.web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot
+  displayName: 'Compile Sass assets'
+
 - bash: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
