@@ -2,7 +2,7 @@ trigger:
   - '*'
 
 pool:
-  name: Default
+  name: Azure Pipelines
 
 variables:
   buildConfiguration: 'Release'  # Release or Debug
